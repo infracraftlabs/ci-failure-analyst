@@ -1,0 +1,100 @@
+2026-11-14T11:40:05.1370000Z Current runner version: '2.329.0'
+2026-11-14T11:40:05.2740000Z ##[group]Operating System
+2026-11-14T11:40:05.4110000Z Ubuntu
+2026-11-14T11:40:05.5480000Z 24.04
+2026-11-14T11:40:05.6850000Z LTS
+2026-11-14T11:40:05.8220000Z ##[endgroup]
+2026-11-14T11:40:05.9590000Z ##[group]Runner Image
+2026-11-14T11:40:06.0960000Z Image: ubuntu-24.04
+2026-11-14T11:40:06.2330000Z Version: 20261102.1
+2026-11-14T11:40:06.3700000Z ##[endgroup]
+2026-11-14T11:40:06.5070000Z ##[group]GITHUB_TOKEN Permissions
+2026-11-14T11:40:06.6440000Z Contents: read
+2026-11-14T11:40:06.7810000Z Metadata: read
+2026-11-14T11:40:06.9180000Z ##[endgroup]
+2026-11-14T11:40:07.0550000Z Secret source: Actions
+2026-11-14T11:40:07.1920000Z Prepare workflow directory
+2026-11-14T11:40:07.3290000Z Prepare all required actions
+2026-11-14T11:40:07.4660000Z Getting action download info
+2026-11-14T11:40:07.6030000Z Download action repository 'actions/checkout@v4' (SHA:0000000000000000000000000000000000000001)
+2026-11-14T11:40:07.7400000Z Download action repository 'example-org/error-reporter-action@v2' (SHA:0000000000000000000000000000000000000002)
+2026-11-14T11:40:07.8770000Z Complete job name: image
+2026-11-14T11:40:08.0140000Z ##[group]Run actions/checkout@v4
+2026-11-14T11:40:08.1510000Z with:
+2026-11-14T11:40:08.2880000Z   repository: example-org/web-shop
+2026-11-14T11:40:08.4250000Z   token: ***
+2026-11-14T11:40:08.5620000Z   ssh-strict: true
+2026-11-14T11:40:08.6990000Z   persist-credentials: false
+2026-11-14T11:40:08.8360000Z   clean: true
+2026-11-14T11:40:08.9730000Z   fetch-depth: 1
+2026-11-14T11:40:09.1100000Z ##[endgroup]
+2026-11-14T11:40:09.2470000Z Syncing repository: example-org/web-shop
+2026-11-14T11:40:09.3840000Z ##[group]Getting Git version info
+2026-11-14T11:40:09.5210000Z Working directory is '/home/runner/work/web-shop/web-shop'
+2026-11-14T11:40:09.6580000Z [command]/usr/bin/git version
+2026-11-14T11:40:09.7950000Z git version 2.51.0
+2026-11-14T11:40:09.9320000Z ##[endgroup]
+2026-11-14T11:40:10.0690000Z [command]/usr/bin/git init /home/runner/work/web-shop/web-shop
+2026-11-14T11:40:10.2060000Z Initialized empty Git repository in /home/runner/work/web-shop/web-shop/.git/
+2026-11-14T11:40:10.3430000Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +3f9a2c1b7e4d5f6a8b9c0d1e2f3a4b5c6d7e8f9a:refs/remotes/origin/main
+2026-11-14T11:40:10.4800000Z From https://github.com/example-org/web-shop
+2026-11-14T11:40:10.6170000Z  * [new ref]         3f9a2c1b7e4d5f6a8b9c0d1e2f3a4b5c6d7e8f9a -> origin/main
+2026-11-14T11:40:10.7540000Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-11-14T11:40:10.8910000Z Switched to a new branch 'main'
+2026-11-14T11:40:11.0280000Z ##[group]Run df -h /
+2026-11-14T11:40:11.1650000Z df -h /
+2026-11-14T11:40:11.3020000Z shell: /usr/bin/bash -e {0}
+2026-11-14T11:40:11.4390000Z ##[endgroup]
+2026-11-14T11:40:11.5760000Z Filesystem      Size  Used Avail Use% Mounted on
+2026-11-14T11:40:11.7130000Z /dev/root        72G   69G  3.1G  96% /
+2026-11-14T11:40:11.8500000Z ##[group]Run docker build -t registry.example.com/web-shop:3f9a2c1 .
+2026-11-14T11:40:11.9870000Z docker build -t registry.example.com/web-shop:3f9a2c1 .
+2026-11-14T11:40:12.1240000Z shell: /usr/bin/bash -e {0}
+2026-11-14T11:40:12.2610000Z ##[endgroup]
+2026-11-14T11:40:12.3980000Z #0 building with "default" instance using docker driver
+2026-11-14T11:40:12.5350000Z #1 [internal] load build definition from Dockerfile
+2026-11-14T11:40:12.6720000Z #1 transferring dockerfile: 912B done
+2026-11-14T11:40:12.8090000Z #1 DONE 0.0s
+2026-11-14T11:40:12.9460000Z #2 [internal] load metadata for registry.example.com/base/node:22-slim
+2026-11-14T11:40:13.0830000Z #2 DONE 0.6s
+2026-11-14T11:40:13.2200000Z #3 [internal] load .dockerignore
+2026-11-14T11:40:13.3570000Z #3 DONE 0.0s
+2026-11-14T11:40:13.4940000Z #4 [builder 1/6] FROM registry.example.com/base/node:22-slim
+2026-11-14T11:40:13.6310000Z #4 DONE 4.2s
+2026-11-14T11:40:13.7680000Z #5 [internal] load build context
+2026-11-14T11:40:13.9050000Z #5 transferring context: 1.21GB 38.4s done
+2026-11-14T11:40:14.0420000Z #5 DONE 38.5s
+2026-11-14T11:40:14.1790000Z #6 [builder 2/6] WORKDIR /app
+2026-11-14T11:40:14.3160000Z #6 DONE 0.1s
+2026-11-14T11:40:14.4530000Z #7 [builder 3/6] COPY . .
+2026-11-14T11:40:14.5900000Z #7 DONE 21.7s
+2026-11-14T11:40:14.7270000Z #8 [builder 4/6] RUN npm ci
+2026-11-14T11:40:14.8640000Z #8 52.10 added 1412 packages in 51s
+2026-11-14T11:40:15.0010000Z #8 DONE 53.0s
+2026-11-14T11:40:15.1380000Z #9 [builder 5/6] RUN npm run build
+2026-11-14T11:40:15.2750000Z #9 0.412 #9 0.412 > vite build
+2026-11-14T11:40:15.4120000Z #9 44.90 built in 44.12s
+2026-11-14T11:40:15.5490000Z #9 DONE 45.3s
+2026-11-14T11:40:15.6860000Z #10 [builder 6/6] RUN npm prune --omit=dev
+2026-11-14T11:40:15.8230000Z #10 DONE 9.8s
+2026-11-14T11:40:15.9600000Z #11 [runtime 2/4] WORKDIR /app
+2026-11-14T11:40:16.0970000Z #11 DONE 0.1s
+2026-11-14T11:40:16.2340000Z #12 [runtime 3/4] COPY --from=builder /app ./
+2026-11-14T11:40:16.3710000Z #12 ERROR: failed to copy files: copy file range failed: no space left on device
+2026-11-14T11:40:16.5080000Z ------
+2026-11-14T11:40:16.6450000Z  > [runtime 3/4] COPY --from=builder /app ./:
+2026-11-14T11:40:16.7820000Z ------
+2026-11-14T11:40:16.9190000Z Dockerfile:18
+2026-11-14T11:40:17.0560000Z --------------------
+2026-11-14T11:40:17.1930000Z   16 |     FROM registry.example.com/base/node:22-slim AS runtime
+2026-11-14T11:40:17.3300000Z   17 |     WORKDIR /app
+2026-11-14T11:40:17.4670000Z   18 | >>> COPY --from=builder /app ./
+2026-11-14T11:40:17.6040000Z   19 |     USER node
+2026-11-14T11:40:17.7410000Z   20 |     CMD ["node", "dist/server.js"]
+2026-11-14T11:40:17.8780000Z --------------------
+2026-11-14T11:40:18.0150000Z ERROR: failed to solve: failed to copy files: copy file range failed: no space left on device
+2026-11-14T11:40:18.1520000Z ##[error]Process completed with exit code 1.
+2026-11-14T11:40:18.2890000Z Post job cleanup.
+2026-11-14T11:40:18.4260000Z [command]/usr/bin/git version
+2026-11-14T11:40:18.5630000Z git version 2.51.0
+2026-11-14T11:40:18.7000000Z Cleaning up orphan processes

@@ -1,0 +1,46 @@
+{
+  "total_count": 3,
+  "jobs": [
+    {
+      "id": 90001,
+      "run_id": 7001,
+      "name": "lint",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.example.com/example-org/web-shop/actions/runs/7001/job/90001",
+      "steps": [
+        {"name": "Set up job", "number": 1, "status": "completed", "conclusion": "success"},
+        {"name": "Run npm run lint", "number": 2, "status": "completed", "conclusion": "success"}
+      ]
+    },
+    {
+      "id": 90002,
+      "run_id": 7001,
+      "name": "test",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.example.com/example-org/web-shop/actions/runs/7001/job/90002",
+      "steps": [
+        {"name": "Set up job", "number": 1, "status": "completed", "conclusion": "success"},
+        {"name": "Run actions/checkout@v4", "number": 2, "status": "completed", "conclusion": "success"},
+        {"name": "Run actions/setup-node@v4", "number": 3, "status": "completed", "conclusion": "success"},
+        {"name": "Run npm ci", "number": 4, "status": "completed", "conclusion": "failure"},
+        {"name": "Run npm test", "number": 5, "status": "completed", "conclusion": "skipped"},
+        {"name": "Post Run actions/checkout@v4", "number": 9, "status": "completed", "conclusion": "success"},
+        {"name": "Complete job", "number": 10, "status": "completed", "conclusion": "success"}
+      ]
+    },
+    {
+      "id": 90003,
+      "run_id": 7001,
+      "name": "image",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.example.com/example-org/web-shop/actions/runs/7001/job/90003",
+      "steps": [
+        {"name": "Set up job", "number": 1, "status": "completed", "conclusion": "success"},
+        {"name": "Run docker build -t registry.example.com/web-shop:3f9a2c1 .", "number": 4, "status": "completed", "conclusion": "failure"}
+      ]
+    }
+  ]
+}

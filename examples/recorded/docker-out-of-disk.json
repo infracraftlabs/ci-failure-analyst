@@ -1,0 +1,25 @@
+{
+  "_note": "Hand-written test response in the model's output shape. Not real model output.",
+  "summary": "The image build failed while copying files into the runtime stage because the runner's disk was full. Disk use was already 96% before the build, and the build context was over 1 GB.",
+  "likely_causes": [
+    {
+      "cause": "The runner ran out of disk space during the multi-stage Docker build.",
+      "confidence": "high",
+      "evidence": [
+        {"source": "log", "quote": "#12 ERROR: failed to copy files: copy file range failed: no space left on device"},
+        {"source": "log", "quote": "/dev/root        72G   69G  3.1G  96% /"}
+      ]
+    },
+    {
+      "cause": "A very large build context (1.21 GB) used much of the remaining space; a .dockerignore may be missing entries.",
+      "confidence": "medium",
+      "evidence": [
+        {"source": "log", "quote": "#5 transferring context: 1.21GB 38.4s done"}
+      ]
+    }
+  ],
+  "next_checks": [
+    "Check which directories are sent in the build context and extend .dockerignore.",
+    "Free disk space before the build, for example by pruning unused Docker data."
+  ]
+}

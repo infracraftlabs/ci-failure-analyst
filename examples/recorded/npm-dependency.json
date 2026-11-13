@@ -1,0 +1,33 @@
+{
+  "_note": "Hand-written test response in the model's output shape. Not real model output. Used by the offline end-to-end test.",
+  "summary": "npm ci stopped because no published version of chart-widgets-example matches the requested range ^4.0.0. The project's package.json probably asks for a major version that does not exist on the registry.",
+  "likely_causes": [
+    {
+      "cause": "package.json requests chart-widgets-example ^4.0.0, but no version in that range exists on the registry.",
+      "confidence": "high",
+      "evidence": [
+        {"source": "log", "quote": "npm error code ETARGET"},
+        {"source": "log", "quote": "No matching version found for chart-widgets-example@^4.0.0."}
+      ]
+    },
+    {
+      "cause": "The dependency is declared directly by the project, so a recent change to package.json is the likely source.",
+      "confidence": "medium",
+      "evidence": [
+        {"source": "log", "quote": "It was specified as a dependency of 'web-shop'"}
+      ]
+    },
+    {
+      "cause": "The npm registry was unreachable during install.",
+      "confidence": "low",
+      "evidence": [
+        {"source": "log", "quote": "npm error network request to registry failed"}
+      ]
+    }
+  ],
+  "next_checks": [
+    "Check the git history of package.json for the change to chart-widgets-example.",
+    "Run npm view chart-widgets-example versions to see which versions exist."
+  ],
+  "suggested_change": "Set chart-widgets-example to a published version range, then run npm install and commit the updated lockfile."
+}

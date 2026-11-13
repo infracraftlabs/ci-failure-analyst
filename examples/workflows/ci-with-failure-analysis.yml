@@ -1,0 +1,50 @@
+# Example: explain a failed CI job in the run's job summary.
+#
+# Copy into .github/workflows/ of the repository you want to watch and adapt the `test` job.
+# Security notes (see README, "Security model"):
+# - Triggered by `pull_request` and `push`, NOT `pull_request_target`.
+# - The analysis job only gets `actions: read` (to list jobs and download logs) and
+#   `contents: read`. It cannot re-run jobs, comment, push or change settings.
+# - It runs in rules-only mode: GitHub-hosted runners have no local model. Use a
+#   self-hosted runner with Ollama if you want AI mode.
+# - Pin actions and the tool to full commit SHAs. The tool's SHA below is a placeholder
+#   until the repository is published.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - run: npm ci
+      - run: npm test
+
+  analyse-failure:
+    # A step inside the failing job cannot read that job's own log (it is still running),
+    # so the analysis is a separate job that runs only when a job it needs has failed.
+    needs: [test]
+    if: failure()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.12"
+      - name: Install cianalyst
+        run: pip install "cianalyst @ git+https://github.com/infracraftlabs/ci-failure-analyst@<full-commit-sha>"
+      - name: Explain the failure
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          cianalyst --github "$GITHUB_REPOSITORY" --run "$GITHUB_RUN_ID" --rules-only >> "$GITHUB_STEP_SUMMARY"

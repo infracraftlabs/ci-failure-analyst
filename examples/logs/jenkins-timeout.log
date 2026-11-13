@@ -1,0 +1,74 @@
+Started by an SCM change
+Obtained Jenkinsfile from git https://git.example.com/example-org/web-shop.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on build-agent-02 in /var/lib/jenkins/workspace/web-shop_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/web-shop_main/.git # timeout=10
+Fetching changes from the remote Git repository
+Checking out Revision 3f9a2c1b7e4d5f6a8b9c0d1e2f3a4b5c6d7e8f9a (refs/remotes/origin/main)
+Commit message: "Add retry to payment client"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] sh
++ npm ci
+added 1412 packages in 48s
++ npm run build
+> vite build
+built in 39.88s
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Integration tests)
+[Pipeline] timeout
+Timeout set to expire in 20 min
+[Pipeline] {
+[Pipeline] sh
++ docker compose -f compose.test.yml up -d
+Container web-shop-db-1  Started
+Container web-shop-payments-stub-1  Started
++ ./scripts/wait-for.sh http://payments-stub.example.com:8080/health 1200
+waiting for http://payments-stub.example.com:8080/health (attempt 1)
+waiting for http://payments-stub.example.com:8080/health (attempt 2)
+waiting for http://payments-stub.example.com:8080/health (attempt 3)
+waiting for http://payments-stub.example.com:8080/health (attempt 4)
+waiting for http://payments-stub.example.com:8080/health (attempt 5)
+waiting for http://payments-stub.example.com:8080/health (attempt 6)
+waiting for http://payments-stub.example.com:8080/health (attempt 7)
+waiting for http://payments-stub.example.com:8080/health (attempt 8)
+health check returned HTTP 000, service not ready yet
+waiting for http://payments-stub.example.com:8080/health (attempt 9)
+waiting for http://payments-stub.example.com:8080/health (attempt 10)
+waiting for http://payments-stub.example.com:8080/health (attempt 11)
+waiting for http://payments-stub.example.com:8080/health (attempt 12)
+Cancelling nested steps due to timeout
+Sending interrupt signal to process
+script returned exit code 143
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] sh
++ docker compose -f compose.test.yml down
+Container web-shop-payments-stub-1  Removed
+Container web-shop-db-1  Removed
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Timeout has been exceeded
+Finished: ABORTED
